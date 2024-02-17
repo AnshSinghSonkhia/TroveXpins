@@ -20,6 +20,20 @@ html, body{
   height: 100%;
 }
 
+/* Remove Arrows/Spinners - Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove Arrows/Spinners - Firefox */
+input[type=number] {
+  -moz-appearance: textfield; /* For Firefox */
+  appearance: textfield; /* Standard - for compatability */
+}
+
+/* On Text Selection --> this color will be used to highlight text */
 ::selection {
   background-color: #fbff92;
 }

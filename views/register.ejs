@@ -28,38 +28,42 @@
 
 		<!-- /index Page Body Starts -->
 		<div class="flex items-center justify-center w-full h-screen bg-[url('https://images.unsplash.com/photo-1672239272089-250c32c3e2e2?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]  bg-no-repeat bg-center bg-cover"> <!-- bg-zinc-300 -->
-			<div class="w-[28vw] h-[80vh] bg-white px-8 py-5 rounded-3xl">
-				<div class="flex items-center justify-center w-full mt-6 ">
+			<div class="w-[28vw] h-[90vh] bg-white px-8 py-5 rounded-3xl">
+				<div class="flex items-center justify-center w-full mt-4 ">
 					<img class="items-center self-center justify-center w-16 cursor-none" src="/images/trove-logo.png" alt="TroveXpins">
 				</div>
-				<h1 class="mt-6 mb-4 text-4xl font-semibold leading-none tracking-tight text-center text-zinc-700">Welcome to TroveXpins</h1>
-				<form action="">
-					<input class="block w-full px-3 py-2 mt-8 bg-white border-2 border-slate-200 rounded-xl" type="text" name="username" placeholder="Username">
+				<h1 class="mt-6 mb-4 text-4xl font-semibold leading-none tracking-tight text-center text-zinc-700">Join TroveXpins</h1>
+			
+
+				<form action="/register" method="post">
+					<input class="block w-full px-3 py-2 mt-6 bg-white border-2 border-slate-200 rounded-xl" type="text" name="username" placeholder="Username">
+
+					<input class="block w-full px-3 py-2 mt-2 bg-white border-2 border-slate-200 rounded-xl" type="email" name="email" placeholder="Email">
+
+					<input class="block w-full px-3 py-2 mt-2 bg-white border-2 border-slate-200 rounded-xl" type="number" name="contact" placeholder="Phone Number">
 					
 					<input class="block w-full px-3 py-2 mt-2 bg-white border-2 border-slate-200 rounded-xl" type="password" name="password" placeholder="Password">
 
-					<a class="inline-block mt-3 font-semibold text-zinc-500" href="#">Forgot password?</a>
-
-					<!-- Login Button Input-->
-					<input class="block w-full px-3 py-2 mt-4 text-xl font-bold text-white bg-[#e70024] rounded-full cursor-pointer" type="submit" value="Login">
+					<!-- Register Button Input-->
+					<input class="block w-full px-3 py-3 mt-6 text-xl font-bold text-white bg-gradient-to-r from-[#ad5389] to-[#3c1053] rounded-full cursor-pointer" type="submit" value="Create New Account"> <!-- bg-[#e70024]  -->
 
 					<p class="flex items-center content-center justify-center w-full mt-3 text-xl font-medium text-zinc-700"><strong>OR</strong></p>
 
 					<!-- Google Button -->
 					<button class="flex items-center content-center justify-center w-full gap-4 px-3 py-2 mt-2 text-xl font-bold text-white bg-black rounded-full">
 						<svg class="w-6 h-6 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-						Continue with Google
+						Sign up with Google
 					</button>
 
 					<!-- Facebook Button -->
 					<button class="flex items-center content-center justify-center w-full gap-4 px-3 py-2 mt-2 text-xl font-bold text-white bg-[#3b5998] rounded-full">
 						<svg class="w-6 h-6 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
-						Sign in with Facebook
+						Sign up with Facebook
 					</button>
 
-					<p class="mt-4 text-zinc-800 text-xs w-[90%]">By continuing, you agree to TrovexPins's <strong>Terms of Service</strong> and acknowledge you've read our <strong>Privacy Policy</strong></p>
+					<p class="mt-4 text-zinc-800 text-xs w-[90%]">By continuing, you agree to TrovexPins's <strong class="cursor-pointer">Terms of Service</strong> and acknowledge you've read our <strong class="cursor-pointer">Privacy Policy</strong></p>
 				</form>
-				<a class="inline-block mt-2 text-xs font-semibold cursor-pointer text-zinc-500" href="/">Already on Trovex? <strong class="font-bold text-black">Login</strong></a>
+				<a class="inline-block mt-3 text-xs font-semibold cursor-pointer text-zinc-500" href="/">Already on TroveXpins? <strong class="font-bold text-black">Login</strong></a>
 			</div>
 		</div>
 

@@ -4,8 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Additional Code Starts
+const expressSession = require('express-session');
+// Additional Code Ends
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+// Additional Code Starts
+const passport = require('passport');
+// Additional Code Ends
 
 // ChatGPT Start
 const fs = require('fs');
@@ -17,6 +25,20 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Additional Code Starts
+app.use(expressSession({
+  resave: false,
+  saveUninitialized: false,
+  secret: "asdguokefpnbsxgucoi651VECUMgd"
+}))   // creating an express-session
+
+      // passport will handle authorization and authentications by using and saving the sessions.
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(usersRouter.serializeUser());
+passport.deserializeUser(usersRouter.deserializeUser());
+// Additional Code End
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,33 +46,6 @@ app.use(cookieParser());
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
-
-// ChatGPT Start
-// Serve static files manually
-// app.get('/public/stylesheets/style.css', (req, res) => {
-//   const filePath = path.join(__dirname, 'public', 'stylesheets', 'style.css');
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//       if (err) {
-//           res.status(404).send('File not found');
-//       } else {
-//           res.setHeader('Content-Type', 'text/css');
-//           res.send(data);
-//       }
-//   });
-// });
-
-// app.get('/public/stylesheets/input.css', (req, res) => {
-//   const filePath = path.join(__dirname, 'public', 'stylesheets', 'input.css');
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//       if (err) {
-//           res.status(404).send('File not found');
-//       } else {
-//           res.setHeader('Content-Type', 'text/css');
-//           res.send(data);
-//       }
-//   });
-// });
-// ChatGPT End
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -5,9 +5,9 @@ TailwindCSS, JavaScript, Node.js, Express, Multer
 
 ## To-Do:
 
-- login & register screen
-- /register
-- /login
+- login & register screen ☑️
+- /register ☑️
+- /login ☑️
 - /profile - profile page with boards
 - /feed - page with all different pins
 - /save/:pinid - This route will be used to save pin in any board.
@@ -74,6 +74,40 @@ router.get('/register', function(req, res, next) {
 
 3. Write the Frontend Code in `register.ejs`
 
+# Setting up `users.js` & creating our database.
+
+1. Install
+
+```shell
+npm i mongoose passport passport-local passport-local-mongoose express-session multer
+```
+
+2. require mongoose in `users.js`:
+
+```js
+const mongoose = require('mongoose');
+const plm = require("passport-local-mongoose");
+```
+
+3. Connect MongoDB with mongoose:
+
+```js
+mongoose.connect("mongodb://127.0.0.1:27017/project_name") // this is setting it up on localhost.
+```
+
+3. Creating userSchema:
+
+```js
+const userSchema = mongoose.Schema({
+  // user schema should be created / defined here.
+});
+
+userSchema.plugin(plm);  // this will enable passport to remember users
+module.exports = mongoose.model("user", userSchema);
+
+// model() -->  Mongoose compiles a model for you.
+// with ("name-of-model", Schema-to-be-followed) as 2 arguments are passed.
+```
 
 ## Problems/Challenges I faced:
 
@@ -86,5 +120,5 @@ This behavior is expected and indicates that the CSS file is being served correc
 Force Refresh: You can force a refresh in your browser, which typically bypasses the cache and fetches the latest version of the CSS file. In most browsers, you can do this by pressing Ctrl + Shift + R or Cmd + Shift + R.
 ```
 
-### Time-stamp: 24:06 / 2:19:07 of 
+### Time-stamp: 54:50 / 2:19:07 of 
 "Pinterest Clone"
