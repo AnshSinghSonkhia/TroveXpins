@@ -1,4 +1,6 @@
-# Tech-Stack:
+# TrovexPins
+
+## Tech-Stack:
 TailwindCSS, JavaScript, Node.js, Express, Multer
 
 ## To-Do:
@@ -56,8 +58,33 @@ npx tailwindcss init
 npx nodemon
 ```
 
+## How to create a new page / route?
+
+1. In `index.js` --> get the route & render it from `views` folder.
+
+```js
+router.get('/register', function(req, res, next) {
+  res.render('register');
+});
+```
+
+2. Make an ejs file with the routes name in `views` folder
+
+- In this case --> `register.ejs`
+
+3. Write the Frontend Code in `register.ejs`
 
 
+## Problems/Challenges I faced:
 
-### Time-stamp: 11:26 / 2:19:07 of 
+1. css file was not loading --> then, I solved it using ChatGPT (Took 25 Minutes)
+```shell
+A 304 Not Modified response means that the browser already has a cached version of the CSS file, and it doesn't need to download it again because it hasn't changed since the last request.
+
+This behavior is expected and indicates that the CSS file is being served correctly by Express. However, if you've made changes to the CSS file and you want to force the browser to fetch the latest version, you can do the following:
+
+Force Refresh: You can force a refresh in your browser, which typically bypasses the cache and fetches the latest version of the CSS file. In most browsers, you can do this by pressing Ctrl + Shift + R or Cmd + Shift + R.
+```
+
+### Time-stamp: 24:06 / 2:19:07 of 
 "Pinterest Clone"
