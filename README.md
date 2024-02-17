@@ -1,4 +1,4 @@
-# TrovexPins
+# TroveXpins - Pinpoint your passion. Discover pins that set your soul alight.
 
 ## Tech-Stack:
 TailwindCSS, JavaScript, Node.js, Express, Multer
