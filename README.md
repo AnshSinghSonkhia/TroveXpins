@@ -109,6 +109,42 @@ module.exports = mongoose.model("user", userSchema);
 // with ("name-of-model", Schema-to-be-followed) as 2 arguments are passed.
 ```
 
+# Using `Multer` & `uuid` to take user images and save in our server
+
+1. Install Packages
+
+```shell
+npm i multer uuid
+```
+
+2. Create `multer.js` in routes
+
+3. Add the following code:
+
+```js
+const multer = require('multer');
+const {v4: uuidv4} = require("uuid");
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/uploads')
+    },
+    filename: function (req, file, cb) {
+      const unique = uuidv4();
+      cb(null, unique + path.extname(file.originalname));
+    }
+})
+  
+const upload = multer({ storage: storage })
+```
+
+4. `./public/images/uploads` is the folder location in `public/images/uploads`
+  - The user images will be stored here.
+  - So, create the folder.
+
+5. We are Creating unique image id with `uuid`
+
 ## Problems/Challenges I faced:
 
 1. css file was not loading --> then, I solved it using ChatGPT (Took 25 Minutes)
@@ -120,5 +156,4 @@ This behavior is expected and indicates that the CSS file is being served correc
 Force Refresh: You can force a refresh in your browser, which typically bypasses the cache and fetches the latest version of the CSS file. In most browsers, you can do this by pressing Ctrl + Shift + R or Cmd + Shift + R.
 ```
 
-### Time-stamp: 54:50 / 2:19:07 of 
-"Pinterest Clone"
+### Time-stamp: 1:21:04 / 2:19:07 of Pinterest
