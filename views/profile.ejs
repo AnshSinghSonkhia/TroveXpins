@@ -40,15 +40,20 @@
 					<span id="uploadicon" class="absolute flex items-center justify-center w-8 h-8 rounded-full bottom-0 right-0 bg-gradient-to-r from-[#b2096f] to-[#3c1053] cursor-pointer ">
 						<i class="text-white ri-pencil-fill"></i>
 					</span>
+					<!-- profile image -->
 					<div class="overflow-hidden rounded-full w-36 h-36 bg-zinc-200 ">
-						<img class="object-cover w-full h-full" src="https://i.pinimg.com/236x/a1/df/56/a1df56805ab191b23143dd02b536c060.jpg" alt="Ansh Singh Sonkhia">
+						<img class="object-cover w-full h-full" src="/images/uploads/<%= user.profileImage %>" alt="">
+						<!-- https://i.pinimg.com/236x/a1/df/56/a1df56805ab191b23143dd02b536c060.jpg -->
 					</div>
 				</div>
-				<h1 class="mt-4 text-3xl font-semibold">Ansh Singh Sonkhia</h1>
-				<h3 class="mt-1 text-lg">@anshsinghsonkhia</h3>
+				<h1 class="mt-4 text-3xl font-semibold"><%= user.name %></h1>
+				<h3 class="mt-1 text-lg">@<%= user.username %></h3>
 				<div class="flex gap-3">
+					<!-- Edit Profile Button -->
 					<a href="/edit" class="px-6 py-2 mt-4 text-base font-medium rounded-full bg-zinc-700 drop-shadow-lg">Edit Profile</a>
-					<button class="px-6 py-2 mt-4 text-base font-medium text-white bg-gradient-to-r from-[#b2096f] to-[#3c1053] cursor-pointer rounded-full drop-shadow-lg">Create Pin</button>
+
+					<!-- Create New Pin Button -->
+					<a href="/add" class="px-6 py-2 mt-4 text-base font-medium text-white bg-gradient-to-r from-[#b2096f] to-[#3c1053] cursor-pointer rounded-full drop-shadow-lg">Create Pin</a>
 
 				</div>
 			</div>
@@ -61,6 +66,19 @@
 					</div>
 					<h3 class="pl-2 mt-2 text-xl font-semibold">All Pins</h3>
 					<h5 class="pl-2 text-sm font-medium opacity-60">28 Pins</h5>
+				</div>
+
+				<!-- Card with user Data -->
+				<div class="card2">
+					<div class="h-40 overflow-hidden shadow-lg w-60 bg-zinc-200 rounded-xl drop-shadow-lg">
+						<!-- This will show the first uploaded pin as the cover -->
+						<a href="/show/posts" class="cursor-zoom-in">
+							<img class="object-cover w-full h-full" src="/images/uploads/<%= user?.posts[0]?.image %>" alt="My Pins">
+						</a>
+					
+					</div>
+					<a href="/show/posts" class="inline-block pl-2 mt-2 text-xl font-semibold">My Pins</a>
+					<h5 class="pl-2 text-sm font-medium opacity-60"><%= user.posts.length %> Pins</h5>
 				</div>
 				
 			

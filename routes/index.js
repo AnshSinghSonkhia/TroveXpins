@@ -3,25 +3,102 @@ var router = express.Router();
 
 // Additional Code Starts
 const userModel = require("./users");
+const postModel = require("./post");
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const upload = require('./multer');
 
 passport.use(new localStrategy(userModel.authenticate()));
 // Additional Code Ends
 
 /* GET home page. - This is the login page */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', {nav: false});   
+  
+  // nav is false, So navbar will not load on '/' route.
 });
 
 /* Get Register Page live at "/register" route */
 router.get('/register', function(req, res, next) {
-  res.render('register');
+  res.render('register', {nav: false});
 });
 
 /* Get Profile Page live at "/profile" route */
-router.get('/profile', isLoggedIn, function(req, res, next) {
-  res.render('profile');
+router.get('/profile', isLoggedIn, async function(req, res, next) {
+  const user =
+  await userModel
+        .findOne({username: req.session.passport.user})
+        .populate("posts");   // populate --> to get all the posts, created by the user.
+        
+        // console.log(user);
+        
+  res.render('profile', {user, nav: true});    // data send with name - "user"
+});
+
+/* To show all the posts, uploaded by the user. */
+router.get('/show/posts', isLoggedIn, async function(req, res, next) {
+  const user =
+  await userModel
+        .findOne({username: req.session.passport.user})
+        .populate("posts");
+
+  res.render('show', {user, nav: true});
+});
+
+
+router.get('/feed', isLoggedIn, async function(req, res, next) {
+  const user = await userModel.findOne({username: req.session.passport.user});
+
+  /* postModel.find().limit(25)  // This is pagination (Posts per page = 25) */
+
+  const posts = await postModel.find().populate("user");
+     
+  res.render('feed', {user, posts, nav: true});
+});
+
+
+/* To add (create) new pins / images  */
+router.get('/add', isLoggedIn, async function(req, res, next) {
+  const user = await userModel.findOne({username: req.session.passport.user});
+  res.render("add", {user, nav: true});
+});
+
+
+/* For creating new post, taking user inputs
+We'll use multer here also */
+router.post('/createpost', isLoggedIn, upload.single('postimage'), async function(req, res, next) {
+  const user = await userModel.findOne({username: req.session.passport.user});
+  
+  const post = await postModel.create({
+    user: user._id,
+    title: req.body.title,
+    description: req.body.description,
+    image: req.file.filename
+  });   // to create the post data in postModel
+
+  user.posts.push(post._id);
+  await user.save();
+  res.redirect("/profile");
+});
+
+
+/* Route for taking user-input profile image using multer 
+
+It will first check, if the user is loggedIn or not
+Then, upload the image.
+*/
+router.post('/fileupload', isLoggedIn, upload.single('image'), async function(req, res, next) {
+    // upload.single('image') has 'image' because form has input name = "image"
+    const user = await userModel.findOne({username: req.session.passport.user});
+    /* When user is loggedin --> req.session.passport.user has his "username".
+    
+    We are sending the uploaded profile image to the database.*/
+
+    user.profileImage = req.file.filename;  // changing the profileImage address/location to the newly updated image.
+
+    await user.save();    // Since, we have manually did some changes --> We need to manually save the user Details.
+
+    res.redirect("/profile");   // After saving the new details, redirect to /profile page.
 });
 
 
@@ -34,6 +111,7 @@ router.post('/register', function(req, res, next) {
   const data = new userModel({  // to save data from form inputs
     username: req.body.username,  // save username input from form --> to username in database.
     //password: req.body.password,
+    name: req.body.fullname,
     email: req.body.email,
     contact: req.body.contact,
   })

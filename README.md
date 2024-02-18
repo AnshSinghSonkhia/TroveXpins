@@ -137,6 +137,8 @@ const storage = multer.diskStorage({
 })
   
 const upload = multer({ storage: storage })
+
+module.exports = upload;
 ```
 
 4. `./public/images/uploads` is the folder location in `public/images/uploads`
@@ -144,6 +146,36 @@ const upload = multer({ storage: storage })
   - So, create the folder.
 
 5. We are Creating unique image id with `uuid`
+
+6. Make a route in `index.js`
+```js
+const upload = require('./multer');
+
+/* Route for taking user-input profile image using multer. It will first check, if the user is loggedIn or not
+Then, upload the image.
+*/
+router.post('/fileupload', isLoggedIn, upload.single('image'), function(req, res, next) {
+    // upload.single('image') has 'image' because form has input name = "image"
+    const user = await userModel.findOne({username: req.session.passport.user});
+    /* When user is loggedin --> req.session.passport.user has his "username".
+    
+    We are sending the uploaded profile image to the database.*/
+
+    user.profileImage = req.file.filename;  // changing the profileImage address/location to the newly updated image.
+
+    await user.save();    // Since, we have manually did some changes --> We need to manually save the user Details.
+    
+    res.redirect("/profile");   // After saving the new details, redirect to /profile page.
+});
+```
+
+7. Request the user profile image with it's path in the `profile.ejs` file
+
+```html
+<img class="object-cover w-full h-full" src="/images/uploads/<%= user.profileImage %>" alt="">
+						
+```
+> There must not be any spaces in the src, otherwise, it will not get the correct path.
 
 ## Problems/Challenges I faced:
 
@@ -156,4 +188,8 @@ This behavior is expected and indicates that the CSS file is being served correc
 Force Refresh: You can force a refresh in your browser, which typically bypasses the cache and fetches the latest version of the CSS file. In most browsers, you can do this by pressing Ctrl + Shift + R or Cmd + Shift + R.
 ```
 
-### Time-stamp: 1:21:04 / 2:19:07 of Pinterest
+### Time-stamp: 2:09:05 / 2:19:07 of Pinterest
+
+# Additional Tasks - My Improvements
+
+1. Default user profile image --> it should be shown for new accounts with no image, or when user wants to delete profile image.
