@@ -188,8 +188,20 @@ This behavior is expected and indicates that the CSS file is being served correc
 Force Refresh: You can force a refresh in your browser, which typically bypasses the cache and fetches the latest version of the CSS file. In most browsers, you can do this by pressing Ctrl + Shift + R or Cmd + Shift + R.
 ```
 
-### Time-stamp: 2:09:05 / 2:19:07 of Pinterest
 
 # Additional Tasks - My Improvements
 
 1. Default user profile image --> it should be shown for new accounts with no image, or when user wants to delete profile image.
+
+2. Dynamically Adding TroveBoards (Trove) --> User should be able to create new collections.
+    - `Create Pin` button ki jagah `Create Trove` button aayega --> new TroveBoard create krne ke liye.
+    - Sabhi boards mai button hona chahiye, unke ander new `Create Pin` ka. --> `+ icon`
+
+3. Sabhi boards ko default cover image dena hai (New Pin add krne ke icon ke saath.)
+
+4. Home Page
+    - Home Page Navbar will have login & sign up buttons.
+
+5. Feed Page should have a `Search Bar` to search different pins by all the users
+
+6. Working `Edit Profile` button
