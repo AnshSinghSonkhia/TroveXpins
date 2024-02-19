@@ -9,6 +9,7 @@ Create Troves & Share your joyful moments with pins
   <code><img height="30" src="https://img.shields.io/badge/Node.js-1e4620?style=for-the-badge&logo=nodedotjs&logoColor=white"></code>
   <code><img height="30" src="https://img.shields.io/badge/MongoDB-238636?style=for-the-badge&logo=mongodb&logoColor=white"></code>
   <code><img height="30" src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"></code>
+  <br><br>
   <code><img height="30" src="https://img.shields.io/badge/Passportjs-000000?style=for-the-badge&logo=Passportjs&logoColor=white"></code>
   <code><img height="30" src="https://img.shields.io/badge/ejs-a6004f?style=for-the-badge&logo=EJS&logoColor=white"></code>
   <code><img height="30" src="https://img.shields.io/badge/Multer-252525?style=for-the-badge&logo=Multer&logoColor=white"></code>
