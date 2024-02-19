@@ -1,36 +1,20 @@
-# TroveXpins - Pinpoint your passion. Discover pins that set your soul alight.
+# TroveXpins - Pinpoint your Passion. Discover Troves that Set your Soul Alight.
+
+Create Troves & Share your joyful moments with pins
 
 ## Tech-Stack:
-TailwindCSS, JavaScript, Node.js, Express, Multer
 
-## To-Do:
-
-- login & register screen ☑️
-- /register ☑️
-- /login ☑️
-- /profile - profile page with boards
-- /feed - page with all different pins
-- /save/:pinid - This route will be used to save pin in any board.
-- /delete/:pinid - To delete any pin from any board.
-- /logout
-- /edit
-- /upload
-
-# `/views/partials` folder
-
-These include the partials, that are present in all the pages. Example:
-- footer
-- header (navbar)
-
-## including partials in `index.ejs`
-
-> paste the below in the body of index.ejs
-
-> we'll write the code in middle
-```h
-<% include ./partials/header.ejs %>
-<% include ./partials/footer.ejs %>
-```
+<code><img height="30" src="https://img.shields.io/badge/Tailwind%20CSS-111111?style=for-the-badge&logo=tailwindcss&logoColor=39bcf7"></code>
+<code><img height="30" src="https://img.shields.io/badge/JavaScript-111111?style=for-the-badge&logo=javascript&logoColor=F7DF1E"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Node.js-1e4620?style=for-the-badge&logo=nodedotjs&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/MongoDB-238636?style=for-the-badge&logo=mongodb&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Passportjs-000000?style=for-the-badge&logo=Passportjs&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/ejs-a6004f?style=for-the-badge&logo=EJS&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Multer-252525?style=for-the-badge&logo=Multer&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Mongoose-238636?style=for-the-badge&logo=Mongoose&logoColor=white"></code>
+  <code><img height="30" src="https://img.shields.io/badge/UUID-252525?style=for-the-badge&logo=uuid&logoColor=white"></code>
+<br>
 
 # Creating the app (program structure) using `express`
 
@@ -56,6 +40,22 @@ npx tailwindcss init
 
 ```shell
 npx nodemon
+```
+
+# `/views/partials` folder
+
+These include the partials, that are present in all the pages. Example:
+- footer
+- header (navbar)
+
+## including partials in `index.ejs`
+
+> paste the below in the body of index.ejs
+
+> we'll write the code in middle
+```h
+<% include ./partials/header.ejs %>
+<% include ./partials/footer.ejs %>
 ```
 
 ## How to create a new page / route?
