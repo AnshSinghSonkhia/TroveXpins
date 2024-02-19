@@ -190,6 +190,67 @@ Force Refresh: You can force a refresh in your browser, which typically bypasses
 ```
 
 
+# Improvement 1 - Another option to upload images via image url
+
+1. To fetch, install
+
+```shell
+npm i axios
+npm i https
+```
+
+2. In `index.js`
+
+```js
+const axios = require('axios'); // Import axios for making HTTP requests
+const https = require('https'); // Import https module
+
+router.post('/createpost', isLoggedIn, upload.single('postimage'), async function(req, res, next) {
+  const user = await userModel.findOne({username: req.session.passport.user});
+  
+  let image;
+    // Check if the request contains a file uploaded
+    if (req.file) {
+        // If a file is uploaded, use the uploaded file
+        image = req.file.filename;
+    } else if (req.body.imageUrl) {
+      // If image URL is provided, fetch the image and save it
+      try {
+
+          const agent = new https.Agent({  
+            rejectUnauthorized: false
+          });       // Don't add this line for production version. I lost my ssl certificate, that's why I need to bypass this.
+
+          const response = await axios.get(req.body.imageUrl, { responseType: 'arraybuffer', httpsAgent: agent });
+          const imageBuffer = Buffer.from(response.data, 'binary');
+          const imageName = 'image_' + Date.now() + '.jpg'; // Generate a unique name for the image
+          const imagePath = './public/images/uploads/' + imageName; // Set the path where the image will be saved
+
+          fs.writeFileSync(imagePath, imageBuffer); // Write the image buffer to a file
+          image = imageName; // Set the image name as the image for the post
+      } catch (error) {
+          console.error('Error fetching image from URL:', error);
+          // Handle error (e.g., image fetch failed)
+          res.status(500).send('Error fetching image from URL');
+          return;
+      }
+  }
+
+  const post = await postModel.create({
+    user: user._id,
+    title: req.body.title,
+    description: req.body.description,
+    image: image
+  });   // to create the post data in postModel
+
+  user.posts.push(post._id);
+  await user.save();
+  res.redirect("/profile");
+});
+```
+
+3. If user uploaded the image, he can not give the url to fetch image. So, we handle it in `add.js`
+
 # Additional Tasks - My Improvements
 
 1. Default user profile image --> it should be shown for new accounts with no image, or when user wants to delete profile image.

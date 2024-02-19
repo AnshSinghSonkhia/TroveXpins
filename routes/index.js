@@ -8,6 +8,10 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const upload = require('./multer');
 
+const axios = require('axios'); // Import axios for making HTTP requests
+const https = require('https'); // Import https module
+const fs = require('fs'); // Import fs for file system operations
+
 passport.use(new localStrategy(userModel.authenticate()));
 // Additional Code Ends
 
@@ -69,11 +73,39 @@ We'll use multer here also */
 router.post('/createpost', isLoggedIn, upload.single('postimage'), async function(req, res, next) {
   const user = await userModel.findOne({username: req.session.passport.user});
   
+  let image;
+    // Check if the request contains a file uploaded
+    if (req.file) {
+        // If a file is uploaded, use the uploaded file
+        image = req.file.filename;
+    } else if (req.body.imageUrl) {
+      // If image URL is provided, fetch the image and save it
+      try {
+
+          const agent = new https.Agent({  
+            rejectUnauthorized: false
+          });
+
+          const response = await axios.get(req.body.imageUrl, { responseType: 'arraybuffer', httpsAgent: agent });
+          const imageBuffer = Buffer.from(response.data, 'binary');
+          const imageName = 'image_' + Date.now() + '.jpg'; // Generate a unique name for the image
+          const imagePath = './public/images/uploads/' + imageName; // Set the path where the image will be saved
+
+          fs.writeFileSync(imagePath, imageBuffer); // Write the image buffer to a file
+          image = imageName; // Set the image name as the image for the post
+      } catch (error) {
+          console.error('Error fetching image from URL:', error);
+          // Handle error (e.g., image fetch failed)
+          res.status(500).send('Error fetching image from URL');
+          return;
+      }
+  }
+
   const post = await postModel.create({
     user: user._id,
     title: req.body.title,
     description: req.body.description,
-    image: req.file.filename
+    image: image
   });   // to create the post data in postModel
 
   user.posts.push(post._id);
