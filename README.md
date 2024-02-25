@@ -251,6 +251,10 @@ router.post('/createpost', isLoggedIn, upload.single('postimage'), async functio
 
 3. If user uploaded the image, he can not give the url to fetch image. So, we handle it in `add.js`
 
+# ToDo: for production deployment
+
+- [ ] Add MongoDB Atlas inplace of mongoDB at localhost
+
 # Additional Tasks - My Improvements
 
 1. Default user profile image --> it should be shown for new accounts with no image, or when user wants to delete profile image.
