@@ -12,6 +12,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-session": "^1.18.0",
+    "http": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
     "mongoose": "^8.1.3",
